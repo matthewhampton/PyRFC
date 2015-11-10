@@ -2039,8 +2039,8 @@ cdef wrapString(SAP_UC* uc, length=-1, rstrip=False):
         length = strlenU(uc)
     if length == 0:
         return ''
-    cdef unsigned utf8_size = length * 2
-    cdef char *utf8 = <char*> malloc(utf8_size + 1)
+    cdef unsigned utf8_size = length * 3 + 1
+    cdef char *utf8 = <char*> malloc(utf8_size)
     utf8[0] = '\0'
     cdef unsigned result_len = 0
     rc = RfcSAPUCToUTF8(uc, length, <RFC_BYTE*> utf8, &utf8_size, &result_len, &errorInfo)
